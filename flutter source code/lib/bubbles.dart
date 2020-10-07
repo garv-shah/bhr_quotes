@@ -12,6 +12,7 @@ Widget getQuote(name) {
         SizedBox(height: 20),
         Image.network(
           name,
+          height: 150,
         ),
         SizedBox(height: 20)
       ],
