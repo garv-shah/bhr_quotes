@@ -5,37 +5,6 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'dart:developer';
 import 'package:characters/characters.dart';
 
-Widget getQuote(name) {
-  if (name.split(":")[0] == "https") {
-    return Column(
-      children: <Widget>[
-        SizedBox(height: 20),
-        Image.network(
-          name,
-          height: 150,
-        ),
-        SizedBox(height: 20)
-      ],
-    );
-  } else {
-    return RichText(
-      text: TextSpan(
-        text: name.split("`")[0],
-        style: TextStyle(
-          fontWeight: FontWeight.bold,
-          color: Colors.black87,
-        ),
-        children: <TextSpan>[
-          TextSpan(text: name.split("`")[1], style: TextStyle(
-            fontWeight: FontWeight.normal,
-            color: Colors.black87,
-          )),
-        ],
-      ),
-    );
-  }
-}
-
 Widget getTextWidgets(List<String> strings)
 {
   return new Row(children: strings.map((item) => new Text(item)).toList());
@@ -125,6 +94,39 @@ class _BubblesState extends State<Bubbles> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
+    double width = MediaQuery.of(context).size.width;
+    double height = MediaQuery.of(context).size.height;
+    Widget getQuote(name) {
+      if (name.split(":")[0] == "https") {
+        return Column(
+          children: <Widget>[
+            SizedBox(height: 20),
+            Image.network(
+              name,
+              height: height / 3,
+            ),
+            SizedBox(height: 20)
+          ],
+        );
+      } else {
+        return RichText(
+          text: TextSpan(
+            text: name.split("`")[0],
+            style: TextStyle(
+              fontWeight: FontWeight.bold,
+              color: Colors.black87,
+            ),
+            children: <TextSpan>[
+              TextSpan(text: name.split("`")[1], style: TextStyle(
+                fontWeight: FontWeight.normal,
+                color: Colors.black87,
+              )),
+            ],
+          ),
+          textAlign: TextAlign.center,
+        );
+      }
+    }
     return Scaffold(
       body: Stack(
         children: <Widget>[
@@ -149,7 +151,10 @@ class _BubblesState extends State<Bubbles> with SingleTickerProviderStateMixin {
                       mainAxisSize: MainAxisSize.min,
                       children: <Widget>[
                         Text('BHRs', style: TextStyle(fontFamily: 'Lemonada', fontSize: 60)),
-                        Column(children: [ for (var name in '$_random'.split(";")) getQuote(name) ]),
+                        Column(
+                            crossAxisAlignment: CrossAxisAlignment.center,
+                            children: [ for (var name in '$_random'.split(";")) getQuote(name) ]
+                        ),
                       ],
                     ),
                   ),
