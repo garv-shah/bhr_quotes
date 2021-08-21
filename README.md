@@ -15,7 +15,7 @@ For example:
 Would render into the Markdown equivalent of:
 
 ```
-**Garv:** Hello my name is Garv
+**Garv:** Hello my name is Garv<br>
 **Bob:** Hello Garv my name is Bob
 ```
 
