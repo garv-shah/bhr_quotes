@@ -8,6 +8,7 @@ With Molly's website, I didn't need any formatting, but over here, I needed a si
 * `` ` ``  Made everything before it bold
 * `;`  Served as a \n or \<br> and created a newline
 <br>
+
 #### For example:
 
 ``` Garv:` Hello my name is Garv;Bob:` Hello Garv my name is Bob```
