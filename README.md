@@ -10,7 +10,7 @@ With Molly's website, I didn't need any formatting, but over here, I needed a si
 <br>
 For example:
 
-`` Garv:` ``
+``` Garv:` ```
 
 Would render into:
 
