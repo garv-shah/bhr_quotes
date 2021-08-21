@@ -10,9 +10,9 @@ With Molly's website, I didn't need any formatting, but over here, I needed a si
 <br>
 For example:
 
-``` Garv:` ```
+``` Garv:` Hello my name is Garv;Bob:` Hello Garv my name is Bob```
 
-Would render into:
+Would render into the Markdown equivalent of:
 
 ```
 **Garv:** Hello my name is Garv
