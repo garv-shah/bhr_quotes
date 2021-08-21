@@ -22,3 +22,6 @@ With Molly's website, I didn't need any formatting, but over here, I needed a si
 ### Which is:<br>
 **Garv:** Hello my name is Garv<br>
 **Bob:** Hello Garv my name is Bob
+
+## Note:
+The actual quote list in the Firestore database is far from up to date (I kind of got bored and gave up updating it), so if I was to ever revisit this project, the next steps would most definetly be to switch the markup language to Markdown and have some sort of semi-automatic system to convert the quotes from the Google Doc to single raw strings
