@@ -19,6 +19,6 @@ Would render into the Markdown equivalent of:
 **Bob:** Hello Garv my name is Bob
 ```
 
-Which is:<br><br>
+Which is:<br>
 **Garv:** Hello my name is Garv<br>
 **Bob:** Hello Garv my name is Bob
