@@ -55,22 +55,7 @@ class _QuoteEditorState extends State<QuoteEditor> {
       ),
       body: Column(
         children: [
-          header('Edit Quotes', context, fontSize: 20, backArrow: true, customBackLogic: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Scaffold(
-              floatingActionButton: FloatingActionButton(
-                onPressed: () {
-                  Navigator.push(
-                      context, MaterialPageRoute(builder: (context) => Theme(data: AppThemes.darkTheme,
-                      child: AuthGate())));
-                },
-                child: Icon(Icons.login),
-              ),
-              body: Stack(children: [
-                Bubbles(),
-                QuoteBox(),
-              ]),
-            )));
-          }),
+          header('Edit Quotes', context, fontSize: 20, backArrow: true),
           Expanded(
             child: StreamBuilder<QuerySnapshot>(
               stream: FirebaseFirestore.instance
