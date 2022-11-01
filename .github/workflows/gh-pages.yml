@@ -19,5 +19,3 @@ jobs:
           channel: 'stable'
       - run: flutter clean
       - uses: bluefireteam/flutter-gh-pages@v7
-        with:
-          baseHref: /
