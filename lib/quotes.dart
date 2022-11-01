@@ -2,6 +2,10 @@ import 'dart:math';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:visual_editor/controller/controllers/editor-controller.dart';
+import 'package:visual_editor/documents/models/document.model.dart';
+import 'package:visual_editor/editor/models/editor-cfg.model.dart';
+import 'package:visual_editor/main.dart';
 
 BoxDecoration myBoxDecoration() {
   return BoxDecoration(
@@ -22,27 +26,30 @@ class QuoteBox extends StatefulWidget {
 }
 
 class _QuoteBoxState extends State<QuoteBox> {
-  var _mFacts;
+  late List<QueryDocumentSnapshot<Map<String, dynamic>>> quotes_list;
 
   Future<dynamic> getData() async {
-
-    final DocumentReference document = FirebaseFirestore.instance.collection("quotes").doc('list');
-
-    await document.get().then<dynamic>((DocumentSnapshot snapshot) async{
-      setState(() {
-        _mFacts = (snapshot.data() as Map<String,dynamic>)['quote'];
-        print(_mFacts);
-      });
-    });
+    quotes_list = (await FirebaseFirestore.instance.collection("quotes_list").get()).docs;
   }
 
 
-  String? _random = '`Welcome to the BHR incorrect quotes doc :D';
+  List _random = [
+    {
+      "insert": "Welcome to the BHR incorrect quotes doc :D"
+    },
+    {
+      "attributes": {
+        "align": "center"
+      },
+      "insert": "\n"
+    }
+  ];
 
   void incrementCounter() {
     setState(() {
       Random random = new Random();
-      _random = _mFacts[random.nextInt(_mFacts.length)];
+      QueryDocumentSnapshot<Map<String, dynamic>> quote = quotes_list[random.nextInt(quotes_list.length)];
+      _random = quote.data()['quote'];
     });
   }
 
@@ -54,41 +61,6 @@ class _QuoteBoxState extends State<QuoteBox> {
 
   @override
   Widget build(BuildContext context) {
-    double height = MediaQuery.of(context).size.height;
-
-    Widget getQuote(name) {
-      if (name.split(":")[0] == "https") {
-        return Column(
-          children: <Widget>[
-            SizedBox(height: 20),
-            Image.network(
-              name,
-              height: height / 3,
-            ),
-            SizedBox(height: 20)
-          ],
-        );
-      } else {
-        print(name);
-        return RichText(
-          text: TextSpan(
-            text: name.split("`")[0],
-            style: TextStyle(
-              fontWeight: FontWeight.bold,
-              color: Colors.black87,
-            ),
-            children: <TextSpan>[
-              TextSpan(text: name.split("`")[1], style: TextStyle(
-                fontWeight: FontWeight.normal,
-                color: Colors.black87,
-              )),
-            ],
-          ),
-          textAlign: TextAlign.center,
-        );
-      }
-    }
-
     return Scaffold(
       backgroundColor: Colors.transparent,
       body: Center(
@@ -106,9 +78,22 @@ class _QuoteBoxState extends State<QuoteBox> {
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     Text('BHRs', style: GoogleFonts.neucha().copyWith(fontSize: 60)),
-                    Column(
-                        crossAxisAlignment: CrossAxisAlignment.center,
-                        children: [ for (var name in '$_random'.split(";")) getQuote(name) ]
+                    SizedBox(
+                      width: 450,
+                      child: VisualEditor(
+                        scrollController: ScrollController(),
+                        focusNode: FocusNode(),
+                        controller: EditorController(
+                            document: DocumentM.fromJson(_random)),
+                        config: EditorConfigM(
+                          scrollable: true,
+                          autoFocus: true,
+                          expands: false,
+                          padding: const EdgeInsets.fromLTRB(
+                              8.0, 16.0, 8.0, 16.0),
+                          readOnly: true,
+                        ),
+                      ),
                     ),
                   ],
                 ),
