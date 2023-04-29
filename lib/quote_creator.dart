@@ -172,7 +172,7 @@ class _CreateQuoteState extends State<CreateQuote> {
         child: Column(
           children: [
             header('Create Quote', context, fontSize: 20, backArrow: true, customBackLogic: () {
-              widget.onSave(_controller.document.toDelta().toJson());
+              widget.onSave(_controller.document.delta.toJson());
               Navigator.of(context).pop();
             }),
             Expanded(

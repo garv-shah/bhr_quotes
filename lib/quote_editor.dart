@@ -6,7 +6,7 @@ import 'package:bhr_quotes/utils/theme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:visual_editor/controller/controllers/editor-controller.dart';
-import 'package:visual_editor/documents/models/document.model.dart';
+import 'package:visual_editor/document/models/document.model.dart';
 import 'package:visual_editor/editor/models/editor-cfg.model.dart';
 import 'package:visual_editor/main.dart';
 
