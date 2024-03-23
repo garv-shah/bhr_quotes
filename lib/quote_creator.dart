@@ -160,7 +160,7 @@ class _CreateQuoteState extends State<CreateQuote> {
 
   @override
   void initState() {
-    _controller = EditorController(document: DocumentM.fromJson(widget.document));
+    _controller = EditorController(document: DeltaDocM.fromJson(widget.document));
 
     super.initState();
   }

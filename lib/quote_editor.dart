@@ -6,7 +6,7 @@ import 'package:bhr_quotes/utils/theme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:visual_editor/controller/controllers/editor-controller.dart';
-import 'package:visual_editor/document/models/document.model.dart';
+import 'package:visual_editor/document/models/delta-doc.model.dart';
 import 'package:visual_editor/editor/models/editor-cfg.model.dart';
 import 'package:visual_editor/main.dart';
 
@@ -86,6 +86,7 @@ class _QuoteEditorState extends State<QuoteEditor> {
                                 const EdgeInsets.fromLTRB(36.0, 6.0, 36.0, 6.0),
                             child: Card(
                                 elevation: 5,
+                                color: Color(0xff14202f),
                                 shape: const RoundedRectangleBorder(
                                   borderRadius:
                                       BorderRadius.all(Radius.circular(15)),
@@ -98,7 +99,7 @@ class _QuoteEditorState extends State<QuoteEditor> {
                                       scrollController: ScrollController(),
                                       focusNode: FocusNode(),
                                       controller: EditorController(
-                                          document: DocumentM.fromJson(
+                                          document: DeltaDocM.fromJson(
                                               quoteData['quote'])),
                                       config: EditorConfigM(
                                         scrollable: true,

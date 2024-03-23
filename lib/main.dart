@@ -34,6 +34,9 @@ class _MyAppState extends State<MyApp> {
         builder: (context) {
           return Scaffold(
             floatingActionButton: FloatingActionButton(
+              backgroundColor: Colors.blue,
+              foregroundColor: Colors.white,
+              shape: CircleBorder(),
               onPressed: () {
                 Navigator.push(
                     context, MaterialPageRoute(builder: (context) => Theme(data: AppThemes.darkTheme,

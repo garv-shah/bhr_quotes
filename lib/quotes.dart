@@ -3,7 +3,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
 import 'package:visual_editor/controller/controllers/editor-controller.dart';
-import 'package:visual_editor/document/models/document.model.dart';
+import 'package:visual_editor/document/models/delta-doc.model.dart';
+import 'package:visual_editor/document/models/delta/delta.model.dart';
 import 'package:visual_editor/editor/models/editor-cfg.model.dart';
 import 'package:visual_editor/main.dart';
 
@@ -45,16 +46,20 @@ class _QuoteBoxState extends State<QuoteBox> {
     }
   ];
 
+  late EditorController controller;
+
   void incrementCounter() {
     setState(() {
       Random random = new Random();
       QueryDocumentSnapshot<Map<String, dynamic>> quote = quotes_list[random.nextInt(quotes_list.length)];
       _random = quote.data()['quote'];
+      controller.update(DeltaM.fromJson(_random));
     });
   }
 
   @override
   void initState() {
+    controller = EditorController(document: DeltaDocM.fromJson(_random));
     super.initState();
     getData();
   }
@@ -83,8 +88,7 @@ class _QuoteBoxState extends State<QuoteBox> {
                       child: VisualEditor(
                         scrollController: ScrollController(),
                         focusNode: FocusNode(),
-                        controller: EditorController(
-                            document: DocumentM.fromJson(_random)),
+                        controller: controller,
                         config: EditorConfigM(
                           scrollable: true,
                           autoFocus: true,
@@ -100,7 +104,9 @@ class _QuoteBoxState extends State<QuoteBox> {
               ),
             ),
             ElevatedButton(
-              onPressed: incrementCounter,
+              onPressed: () {
+                incrementCounter();
+              },
               style: ElevatedButton.styleFrom(
                 foregroundColor: Color.fromRGBO(255, 250, 148, 1),
                 backgroundColor: Color.fromRGBO(219, 174, 59, 0.85),
